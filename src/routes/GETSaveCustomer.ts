@@ -165,7 +165,7 @@ export async function GETSaveCustomer(req: Request, res: Response) {
         const encryptedToken = encryptData(sensitiveData);
 
         // Build clean URL with only `parkId`, `cartId`, and `token`
-        const cardConnectUrl = `https://stg-campspot-checkout-page.onrender.com/booking-checkout.php?parkId=${encodeURIComponent(parkId)}&parkSlug=${encodeURIComponent(parkSlug)}&cartId=${encodeURIComponent(shoppingCartUuid)}&token=${encodeURIComponent(encryptedToken)}`;
+        const cardConnectUrl = `https://personal-stg-campspot-checkout-page.onrender.com/booking-checkout.php?parkId=${encodeURIComponent(parkId)}&parkSlug=${encodeURIComponent(parkSlug)}&cartId=${encodeURIComponent(shoppingCartUuid)}&token=${encodeURIComponent(encryptedToken)}`;
 
 
         console.log("Secure URL:", cardConnectUrl);
