@@ -67,23 +67,14 @@ export async function GETAddCart(
     promoCode = decodeURIComponent(promoCode);
     userSite = decodeURIComponent(userSite);
 
-    if (
-      rvType &&
-      rvCategory &&
-      rvSlideout_value &&
-      (rvLength === null || rvLength === '' || /^[0-9\s]+$/.test(rvLength))
-    ) {
-      rvCategory = 'lodging'
-      console.log('RV Category: ', rvCategory);
-      console.log('RV Type: ', rvType);
-      console.log('RV Length: ', rvLength);
-      console.log('RV Slideout Value: ', rvSlideout_value);
+    if (rvCategory !== 'lodging' && rvCategory !== 'rv') {
+      if (rvType === '0' && rvLength === '0' && rvSlideout_value === '0' && rvSlideout_label === '0') { 
+        rvCategory = 'lodging';
+      } else {
+        rvCategory = 'rv';
+      }
     }
 
-    else {
-      rvCategory = 'rv'
-    }
-    
     const queryPara = {
       parkId: parkId,
       campsiteTypeId: campsiteTypeId,
