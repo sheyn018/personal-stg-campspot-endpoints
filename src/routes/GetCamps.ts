@@ -47,6 +47,7 @@ export async function GETCamps(
   const fetchCampsiteInfo = async () => {
     const baseUrl =
       `https://insiderperks.com/wp-content/endpoints/${environment}/get-campsite-type.php`;
+      console.log("Base URL in Get Camps: ", baseUrl);
     let params = {
       id: req.query.parkId,
       campsiteid: req.query.campsiteTypeId,
