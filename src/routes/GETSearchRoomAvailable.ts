@@ -36,6 +36,8 @@ export async function GETSearchRoomAvailable(req: Request, res: Response) {
         environment = decodeURIComponent(environment) || "campspot-staging";
 
         const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/search-room-available.php`;
+
+        console.log("Base URL: ", baseUrl);
         const [validCheckin, validCheckout] = await Promise.all([
             fixDateIfInvalid(checkin as string),
             fixDateIfInvalid(checkout as string),
