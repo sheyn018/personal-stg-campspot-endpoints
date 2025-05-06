@@ -13,14 +13,18 @@ export async function GETCamps(
     childrenCount: string;
     petCount: string;
     campsiteTypeId: string;
+    environment: string;
   }>,
   res: Response
 )
 
 {
-  
   let urlWithParams = "";
-  
+
+  // Get environment from query with fallback to staging
+  console.log("Environment: ", req.query.environment);
+  const environment = (req.query.environment as string) || "campspot-staging";
+
   const fetchAPI = async (url: string) => {
     try {
       const response = await fetch(url);
@@ -38,7 +42,7 @@ export async function GETCamps(
 
   const fetchCampsiteInfo = async () => {
     const baseUrl =
-      "https://insiderperks.com/wp-content/endpoints/campspot-staging/get-campsite-type.php";
+      `https://insiderperks.com/wp-content/endpoints/${environment}/get-campsite-type.php`;
     let params = {
       id: req.query.parkId,
       campsiteid: req.query.campsiteTypeId,
@@ -135,7 +139,7 @@ export async function GETCamps(
 
   //   console.log("Checking for available camps of site: ", site);
 
-  //   const siteMapUrl = `https://insiderperks.com/wp-content/endpoints/campspot-staging/sitemaps/${pID}.png`;
+  //   const siteMapUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/sitemaps/${pID}.png`;
 
   //   const prompt = `Role: 
   //   You are an assistant helping a potential guest book their site by describing the locations of the ${site} sites at the resort. They cannot see the map, 
