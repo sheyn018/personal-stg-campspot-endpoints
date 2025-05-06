@@ -47,7 +47,7 @@ export async function GETSaveCustomer(req: Request, res: Response) {
         reasonStay = decodeURIComponent(reasonStay);
         bookingNeed = decodeURIComponent(bookingNeed);
 
-        console.log("Environment in Save Customer: ", decodeURIComponent(environment));
+        console.log("Environment Save Customer:", req.query.environment);
         environment = decodeURIComponent(environment) || "campspot-staging";
 
         // // First API call: save customer details

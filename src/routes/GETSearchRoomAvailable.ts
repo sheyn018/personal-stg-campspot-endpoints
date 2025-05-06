@@ -32,7 +32,7 @@ export async function GETSearchRoomAvailable(req: Request, res: Response) {
         slideout = decodeURIComponent(slideout);
         equipmentType = decodeURIComponent(equipmentType);
 
-        console.log("Environment in Search Rooms: ", decodeURIComponent(environment));
+        console.log("Environment Search Rooms: ", req.query.environment);
         environment = decodeURIComponent(environment) || "campspot-staging";
 
         const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/search-room-available.php`;

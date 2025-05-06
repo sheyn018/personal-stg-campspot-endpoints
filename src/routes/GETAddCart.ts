@@ -68,7 +68,7 @@ export async function GETAddCart(
     promoCode = decodeURIComponent(promoCode);
     userSite = decodeURIComponent(userSite);
 
-    console.log("Environment in Get Add Cart: ", decodeURIComponent(environment));
+    console.log("Environment Add Cart: ", req.query.environment);
     environment = decodeURIComponent(environment) || "campspot-staging";
 
     if (rvCategory !== 'lodging' && rvCategory !== 'rv') {
