@@ -86,7 +86,8 @@ export async function GETCamps(
         return JSON.stringify({ response: "No results found." });
       }
 
-      const { campsites, name: siteName, pricing } = jsonResponse;
+      const { campsites, name: siteName, pricing, smartPricing } = jsonResponse;
+      const breakDownPrice = smartPricing;
       const siteLockFee = pricing.feeSummary.lockFee;
       const siteType = (req.query.parkId as string)?.toLowerCase();
       const filteredCampsites = campsites
@@ -103,6 +104,7 @@ export async function GETCamps(
       return JSON.stringify({
         filteredCampsites: filteredCampsites.length ? filteredCampsites : [],
         siteLockFee,
+        breakDownPrice,
       });
     } catch {
       return JSON.stringify({ response: "Error fetching campsite data" });
