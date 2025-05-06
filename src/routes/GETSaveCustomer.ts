@@ -141,7 +141,8 @@ export async function GETSaveCustomer(req: Request, res: Response) {
                 sm: data.smsMessage, // smsMessage
                 sr: data.sourceReferral, // sourceReferral
                 rs: data.reasonStay, // reasonStay
-                bn: data.bookingNeed // bookingNeed
+                bn: data.bookingNeed, // bookingNeed
+                env: environment // environment
             };
             
             // Remove whitespace from JSON
