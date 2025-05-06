@@ -19,6 +19,10 @@ export async function GETCamps(
 )
 
 {
+  console.log("All query parameters:", JSON.stringify(req.query));
+  console.log("Environment parameter specifically:", req.query.environment);
+  console.log("Type of environment:", typeof req.query.environment);
+
   let urlWithParams = "";
 
   // Get environment from query with fallback to staging
