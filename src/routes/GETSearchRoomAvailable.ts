@@ -17,6 +17,7 @@ export async function GETSearchRoomAvailable(req: Request, res: Response) {
             length,
             slideout, 
             equipmentType,
+            environment,
         } = req.query;
 
         // Decoding the variables
@@ -31,7 +32,9 @@ export async function GETSearchRoomAvailable(req: Request, res: Response) {
         slideout = decodeURIComponent(slideout);
         equipmentType = decodeURIComponent(equipmentType);
 
-        const baseUrl = "https://insiderperks.com/wp-content/endpoints/campspot-staging/search-room-available.php";
+        environment = decodeURIComponent(environment) || "campspot-staging";
+
+        const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/search-room-available.php`;
         const [validCheckin, validCheckout] = await Promise.all([
             fixDateIfInvalid(checkin as string),
             fixDateIfInvalid(checkout as string),

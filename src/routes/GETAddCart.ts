@@ -43,7 +43,8 @@ export async function GETAddCart(
       rvType,
       rvLength,
       promoCode,
-      userSite
+      userSite,
+      environment,
     } = req.query;
 
     // Convert string values to appropriate types
@@ -67,6 +68,8 @@ export async function GETAddCart(
     promoCode = decodeURIComponent(promoCode);
     userSite = decodeURIComponent(userSite);
 
+    environment = decodeURIComponent(environment) || "campspot-staging";
+
     if (rvCategory !== 'lodging' && rvCategory !== 'rv') {
       if (rvType === '0' && rvLength === '0' && rvSlideout_value === '0' && rvSlideout_label === '0') { 
         rvCategory = 'lodging';
@@ -87,7 +90,7 @@ export async function GETAddCart(
     };
 
     // Call rebook function first
-    const baseUrl = "https://insiderperks.com/wp-content/endpoints/campspot-staging/rebook-cart.php";
+    const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/rebook-cart.php`;
 
     interface RebookParams {
       email: string;
@@ -117,7 +120,7 @@ export async function GETAddCart(
       const params = { ...queryPara, ...dynamicParams };
       console.log('Rebook String: ', rebookString);
       const userSite = params.userSite;
-      const getCamps = "https://insiderperks.com/wp-content/endpoints/campspot-staging/get-campsite-type.php";
+      const getCamps = `https://insiderperks.com/wp-content/endpoints/${environment}/get-campsite-type.php`;
       
       const campsParams: Record<string, string | number> = {
         id: params.parkId ?? 0,
@@ -191,7 +194,7 @@ export async function GETAddCart(
     };
 
     // Existing code for saving customer details
-    const addCartUrl = "https://insiderperks.com/wp-content/endpoints/campspot-staging/add-cart.php";
+    const addCartUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/add-cart.php`;
     const campsiteId = await findCampsite();
     let slideOutValue: string, slideOutLabel: string;
   

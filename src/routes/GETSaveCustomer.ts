@@ -23,7 +23,8 @@ export async function GETSaveCustomer(req: Request, res: Response) {
             minPayment,
             sourceReferral,
             reasonStay,
-            bookingNeed
+            bookingNeed,
+            environment,
         }: any = req.query;
 
         // Decoding the variables
@@ -46,8 +47,10 @@ export async function GETSaveCustomer(req: Request, res: Response) {
         reasonStay = decodeURIComponent(reasonStay);
         bookingNeed = decodeURIComponent(bookingNeed);
 
+        environment = decodeURIComponent(environment) || "campspot-staging";
+
         // // First API call: save customer details
-        const saveCustomerUrl = "https://insiderperks.com/wp-content/endpoints/campspot-staging/save-customer.php";
+        const saveCustomerUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/save-customer.php`;
         const customerData = {
             parkId,
             shoppingCartUuid,
@@ -90,7 +93,7 @@ export async function GETSaveCustomer(req: Request, res: Response) {
         // }
 
         // Second API call: calculate subtotal
-        const subTotalbaseUrl = "https://insiderperks.com/wp-content/endpoints/campspot-staging/calculate-subtotal.php";
+        const subTotalbaseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/calculate-subtotal.php`;
 
         // Dummy data, replace with dynamic data when needed
         const subTotalparams: any = {
@@ -167,9 +170,7 @@ export async function GETSaveCustomer(req: Request, res: Response) {
         // Build clean URL with only `parkId`, `cartId`, and `token`
         const cardConnectUrl = `https://personal-stg-campspot-checkout-page.onrender.com/booking-checkout.php?parkId=${encodeURIComponent(parkId)}&parkSlug=${encodeURIComponent(parkSlug)}&cartId=${encodeURIComponent(shoppingCartUuid)}&token=${encodeURIComponent(encryptedToken)}`;
 
-
         console.log("Secure URL:", cardConnectUrl);
-
 
         return res.send({ status, /*guestId,*/ finalTotal, cardConnectUrl });
     }
