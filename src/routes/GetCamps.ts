@@ -20,7 +20,9 @@ export async function GETCamps(
 
 {
   let urlWithParams = "";
-  let environment = req.query.environment || "campspot-staging";
+
+  // Get environment from query with fallback to staging
+  const environment = (req.query.environment as string) || "campspot-staging";
 
   const fetchAPI = async (url: string) => {
     try {
