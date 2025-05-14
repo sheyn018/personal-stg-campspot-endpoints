@@ -94,35 +94,23 @@ export async function GETSaveCustomer(req: Request, res: Response) {
         // }
 
         // Second API call: calculate subtotal
-        const subTotalbaseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/calculate-subtotal.php`;
-
-        // Dummy data, replace with dynamic data when needed
-        const subTotalparams: any = {
-            parkId: parkId,
-            cartId: shoppingCartUuid
-        };
-
-        let subtotal, finalTotal;
-
-        // Convert the parameters to a query string
-        const subTotalqueryString = Object.keys(subTotalparams)
-            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(subTotalparams[key])}`)
+        const baseUrl = `https://insiderperks.com/wp-content/endpoints/${environment}/get-cart-checkout.php`;
+        const params: any = { cartId: shoppingCartUuid, parkId: parkId };
+        const queryString = Object.keys(params)
+            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
             .join('&');
+        const urlWithParams = `${baseUrl}?${queryString}`;
 
-        // Append the query string to the URL
-        const subTotalurlWithParams = `${subTotalbaseUrl}?${subTotalqueryString}`;
-        const subTotalfetchOptions = {
-            method: 'POST',
-        };
+        let finalTotal;
 
         try {
-            const response = await fetch(subTotalurlWithParams, subTotalfetchOptions);
-            subtotal = await response.json();
+            const response = await fetch(urlWithParams);
+            const cart = await response.json();
 
-            finalTotal = JSON.parse(subtotal);
-            finalTotal = finalTotal.subtotal;
+            const grandTotal = cart.cart.parkShoppingCarts[parkId].grandTotal || 0;
+            
+            finalTotal = grandTotal;
         }
-
         catch (error) {
             return res.status(500).send(error);
         }
