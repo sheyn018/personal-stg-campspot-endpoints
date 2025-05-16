@@ -24,6 +24,7 @@ export async function GETSaveCustomer(req: Request, res: Response) {
             sourceReferral,
             reasonStay,
             bookingNeed,
+            rvYear,
             environment,
         }: any = req.query;
 
@@ -46,6 +47,7 @@ export async function GETSaveCustomer(req: Request, res: Response) {
         sourceReferral = decodeURIComponent(sourceReferral);
         reasonStay = decodeURIComponent(reasonStay);
         bookingNeed = decodeURIComponent(bookingNeed);
+        rvYear = decodeURIComponent(rvYear);
 
         console.log("Environment Save Customer:", req.query.environment);
         environment = decodeURIComponent(environment) || "campspot-staging";
@@ -130,6 +132,7 @@ export async function GETSaveCustomer(req: Request, res: Response) {
                 sr: data.sourceReferral, // sourceReferral
                 rs: data.reasonStay, // reasonStay
                 bn: data.bookingNeed, // bookingNeed
+                ry: data.rvYear, // rvYear
                 env: environment // environment
             };
             
@@ -151,7 +154,8 @@ export async function GETSaveCustomer(req: Request, res: Response) {
             smsMessage: smsMessage,
             sourceReferral: sourceReferral,
             reasonStay: reasonStay,
-            bookingNeed: bookingNeed
+            bookingNeed: bookingNeed,
+            rvYear: rvYear,
         };
 
         // Encode data
