@@ -104,7 +104,7 @@ export async function GETSearchRoomAvailable(req: Request, res: Response) {
             const availability = campsite.availability;
             const isPetFriendly = String(campsite.isPetFriendly ?? false);
 
-            if (siteType === look && availability === "AVAILABLE") {
+            if ((look === "rv" && siteType === "rv" && availability === "AVAILABLE") || (look !== "rv" && availability === "AVAILABLE")) {
               // User does not have pets
               if (petsCheck === 0) {
                 const { id, name, description, averagePricePerNight, totalTripPrice, amenities } = campsite;
