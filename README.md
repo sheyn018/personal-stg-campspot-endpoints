@@ -1,18 +1,33 @@
-To get started first install NodeJS and Bun:
-https://nodejs.org/en
+# Getting Started
 
-https://bun.sh/docs/installation
+## Prerequisites
 
-Then install pnpm
-```
-npm i -g pnpm
-```
-Then install dependencies
-```
+First, install the required tools:
+
+1. [NodeJS](https://nodejs.org/en)
+2. [Bun](https://bun.sh/docs/installation)
+3. Install pnpm:
+   ```bash
+   npm i -g pnpm
+   ```
+
+## Setup
+
+Install dependencies:
+
+```bash
 pnpm i
 ```
-Then run the script
-```
+
+## Development
+
+Start the local development server:
+
+```bash
 bun run dev
 ```
-This will start a local dev server.
+
+## Deployment Notes
+
+When deploying to production:
+- Change the Card Connect URL in the save customer function

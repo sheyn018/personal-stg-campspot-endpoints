@@ -7,13 +7,13 @@ export async function POSTGetCampInfo(req: Request<{ camp_id: string }>, res: Re
     try {
         console.log(`startin..`)
         const inputVars: any = req.body;
-        const parkId = inputVars?.parkId || req.params.camp_id || "92";
+        const parkId = inputVars?.parkId || req.params.camp_id;
 
         const baseUrl = "https://insiderperks.com/wp-content/endpoints/campspot-staging/park-meta.php";
         const placeholder = '1';
 
         const params: any = {
-            parkId: req.params.camp_id || parkId || "92",
+            parkId: req.params.camp_id || parkId,
         };
 
         // Convert the parameters to a query string
